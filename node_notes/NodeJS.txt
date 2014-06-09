@@ -1,15 +1,31 @@
 Querying & File Reading:
-	Streaming API with files as if they were network streams. You cant read/write from a specific point however. For that
-	you use filesystem itself. 
-	
-	Normalizing Path:
-		normalizing path from users or as a result of joining two paths. Useful usually before storing files
-		eg: var path = require('path');
-				path.normalize('/foo/bar//baz/asdf/quux/..');   // => '/foo/bar/baz/asdf'
-	
-	Joining Paths:
-		Using "path.join()"
-		eg: var path = require('path');
-				path.join('/foo', 'bar', 'baz/asdf', 'quux', '..');  // => '/foo/bar/baz/asdf'
-				
+  Streaming API with files as if they were network streams. You cant read/write from a specific point however. For that
+  you use filesystem itself. 
+  
+  Normalizing Path:
+    normalizing path from users or as a result of joining two paths. Useful usually before storing files
+    eg: var path = require('path');
+        path.normalize('/foo/bar//baz/asdf/quux/..');   // => '/foo/bar/baz/asdf'
+  
+  Joining Paths:
+    Using "path.join()"
+    eg: var path = require('path');
+        path.join('/foo', 'bar', 'baz/asdf', 'quux', '..');  // => '/foo/bar/baz/asdf'
+  
+  Resolving Paths:
+    Resolve a series of paths into a normalized absolute path using "path.resolve()"
+    
+  Opening a file:
+    "fs.open()"
+    
+  Read a file:
+    "fs.read()" See test.js for more details
+    
+  Writing to file:
+    "fs.write()" See test.js for more details
+  
+  Closing files:
+    "fs.close()" Useful for closing files to avoid leaking file descriptors
+      
+        
 
