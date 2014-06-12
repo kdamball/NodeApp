@@ -45,4 +45,51 @@ var fs = require('fs');
     }); 
 */
 
+/* Child Process
+  var child = require("child_process"),
+    exec = child.exec,
+    cmd = "type *";
+
+  exec(cmd, function(err, stdout, stderr){
+    console.log(stdout);
+  }) 
+*/
+
+
+/* Passing Environment vars to a child process
+  var env = process.env,
+   varName,
+   envCopy = {},
+   exec = require('child_process').exec;
+  // Copy process.env into envCopy
+  for (varName in env) {
+   envCopy[varName] = env[varName];
+  }
+  // Assign some custom variables
+  envCopy['CUSTOM ENV VAR'] = 'some value';
+  envCopy['CUSTOM ENV VAR 2'] = 'some other value';
+  // Execute some command with process.env and my custom variables
+  exec('dir', { env: envCopy }, function(err, stdout, stderr) {
+   if (err) { throw err; }
+   console.log('stdout:', stdout);
+   console.log('stderr:', stderr);
+  }); 
+*/
+
+/* Running another JS file with child process
+  var exec = (require("child_process")).exec;
+  // have to include "" below because '' doesn't work with cmd
+  exec('"' + process.execPath + '" child.js', {env: {number: 123}}, function(err, stdout, stderr){
+    if (err) {throw err};
+    console.log("stdout: \n", stdout);
+    console.log("stderr: \n", stderr);
+  });
+ */
+
+
+
+
+
+
+
 
