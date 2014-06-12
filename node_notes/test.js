@@ -86,6 +86,58 @@ var fs = require('fs');
   });
  */
 
+ 
+ /* CMD inputs
+  // unpause the stdin stream
+  var number=0;
+  process.stdin.resume();
+  process.stdin.on('data', function(data) {
+    Number(data)!== NaN? number+= Number(data) : number = data;
+   try {
+    ++number;
+   process.stdout.write(number + "\n");
+   } catch(err) {
+   process.stderr.write(err.message + "\n");
+   }
+  });
+ */
+
+
+/*  CHILD PROCESS SPAWN
+  var spawn = require('child_process').spawn;
+  // Spawn the child with a node process executing the plus_one app
+  //SPAWN IGNORES PATHEXT, no need to use process.execPath!!!!!
+  var child = spawn('node', ['plus_one.js']); 
+  // Call this function every 1 second (1000 milliseconds):
+  setInterval(function() {
+   
+   // Create a random number smaller than 10,000
+   var number = Math.floor(Math.random() * 10000);
+   
+   // Send that number to the child process:
+   child.stdin.write(number + "\n");
+   
+   // Get the response from the child process and print it:
+   child.stdout.once('data', function(data) {
+   console.log('child replied to ' + number + ' with: ' + data);
+   });
+  }, 2000);
+  child.stderr.on('data', function(data) {
+   process.stdout.write(data);
+  });
+
+ */
+
+
+var spawn = require("child_process").spawn;
+
+var child = spawn("cmd", ["dir"]);
+child.on("exit", function(code){
+  console.log("Child exited with code " +code);
+});
+
+
+
 
 
 

@@ -41,9 +41,14 @@ External Processes:
       maxBuffer - max byte size for stdout or stderr (default is 200 * 1024)
       killSignal - signal to send when maxBuffer or timeout is reached
       env - environment vars to pass to child process (see example in code)
+  You can create a new child process by using "spawn()". You dont have to use "process.execPath" in this
+    case like in "exec()" because "spawn()" ignores PATHEXT in windows. Unlike "exec()", you can 
+    communicate with the child process. It also isn't a memory hugger! Check sample code for details.
+  
 
 
 
+  
 
 
 
