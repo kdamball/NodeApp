@@ -129,13 +129,6 @@ var fs = require('fs');
  */
 
 
-var spawn = require("child_process").spawn;
-
-var child = spawn("cmd", ["dir"]);
-child.on("exit", function(code){
-  console.log("Child exited with code " +code);
-});
-
 
 
 

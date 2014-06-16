@@ -45,7 +45,30 @@ External Processes:
     case like in "exec()" because "spawn()" ignores PATHEXT in windows. Unlike "exec()", you can 
     communicate with the child process. It also isn't a memory hugger! Check sample code for details.
   
+Streams:
+  Data transfer abstracted as streams. Can be of any type (e.g TCP, file etc)
+  Slow client problem: Can be solved by constantly checking on whether there's buffered data.
+    require('http').createServer(function(req, res) {
+      var rs = fs.createReadStream('/path/to/big/file');
 
+      rs.on('data', function(data) {
+        if (!res.write(data)) { //checking to see whether there's slow buffered data
+          rs.pause();
+        }
+      });
+      res.on('drain', function() {
+        rs.resume();
+      });
+      rs.on('end', function() {
+        res.end();
+      });
+    }).listen(8080);
+  Because this solution is a recurring pattern, Node has this captured to "stream.pipe()"
+    require('http').createServer(function(req, res) {
+     var rs = fs.createReadStream('/path/to/big/file');
+     rs.pipe(res);
+    }).listen(8080);
+  
 
 
   
