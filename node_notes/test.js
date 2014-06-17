@@ -128,6 +128,28 @@ var fs = require('fs');
 
  */
 
+ 
+/* Timeout a connection/socket (NOT A SERVER!!)
+  var server = require('net').createServer(function(socket) {
+    var timeout = 1000; // 1 minute
+    socket.setTimeout(timeout);
+    socket.on('timeout', function() {
+      socket.write('idle timeout, disconnecting, bye!');
+      socket.end();
+    });
+  }).listen(4001); 
+*/
+
+
+
+
+
+
+
+
+
+
+
 
 
 
