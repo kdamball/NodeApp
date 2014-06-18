@@ -68,10 +68,16 @@ Streams:
      var rs = fs.createReadStream('/path/to/big/file');
      rs.pipe(res);
     }).listen(8080);
-  
+
+TCP Servers:
+  Built by "require('net')" module. 
+  "require('net').createServer(function(socket){})" with the socket object representing a connection with a client.
+  "socket" object has to be passed into a callback.
 
 
-  
+
+
+
 
 
 
