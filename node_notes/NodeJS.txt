@@ -75,8 +75,23 @@ TCP Servers:
   "socket" object has to be passed into a callback.
   More code in "test.js"
 
-
-
+HTTP Servers:
+  Uses TCP as its transport protocol.
+  Requests:
+    When you receive a request you don't grab its body because it hasn't arrived yet. request object is a ReadStream.
+    Properties of a request: url, methods, headers
+  Response:
+    Header - "res.WriteHeader(status, headers)". headers argument is optional.
+      You can only change a header (i.e "res.setHeader(name, value)") iff you haven't sent a body ("res.write()") or
+        written a header ("res.writeHeader()") because they've already been sent.
+      You can also remove it by "res.removeHeader(name)"
+    Body - either strings or buffers.
+    Streaming HTTP Chunked responses - node allows sending continous data to the client (unless Content-Length is specified)
+      Piping a file - using chunked responses, one can easily pipe files (e.g audio & video). Check code
+      Piping a child process - Uses the same logic. Remember to kill child process should the response end.
+  
+    
+  
 
 
 

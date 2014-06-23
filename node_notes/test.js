@@ -87,8 +87,7 @@ var fs = require('fs');
  */
 
  
- /* CMD inputs
-  // unpause the stdin stream
+/*  //CMD inputs: unpause the stdin stream
   var number=0;
   process.stdin.resume();
   process.stdin.on('data', function(data) {
@@ -100,15 +99,15 @@ var fs = require('fs');
    process.stderr.write(err.message + "\n");
    }
   });
+
  */
 
-
-/*  CHILD PROCESS SPAWN
+/*  //CHILD PROCESS SPAWN
   var spawn = require('child_process').spawn;
-  // Spawn the child with a node process executing the plus_one app
+  //Spawn the child with a node process executing the plus_one app
   //SPAWN IGNORES PATHEXT, no need to use process.execPath!!!!!
   var child = spawn('node', ['plus_one.js']); 
-  // Call this function every 1 second (1000 milliseconds):
+  //Call this function every 1 second (1000 milliseconds):
   setInterval(function() {
    
    // Create a random number smaller than 10,000
@@ -194,6 +193,28 @@ var fs = require('fs');
   server.listen(4001);
 
  */
+
+/* //HTTP Server
+  var util = require("util");
+  require("http").createServer(function(req, res){
+    res.writeHead(200, {"Content-Type": "text/plain"});
+    res.end(util.inspect(req.headers));
+  }).listen(8000)
+
+ */
+
+ 
+/* //HTTP File piping
+  var fs = require("fs");
+  require("http").createServer(function(req, res){
+    res.writeHead(200, {"Content-Type": "video/mp4"});
+    rs = fs.createReadStream("sample.mp4");
+    rs.pipe(res);
+  }).listen(8000);
+  */
+
+
+
 
 
 
