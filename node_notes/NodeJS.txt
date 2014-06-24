@@ -89,10 +89,15 @@ HTTP Servers:
     Streaming HTTP Chunked responses - node allows sending continous data to the client (unless Content-Length is specified)
       Piping a file - using chunked responses, one can easily pipe files (e.g audio & video). Check code
       Piping a child process - Uses the same logic. Remember to kill child process should the response end.
-  
-    
-  
 
+TCP Client:
+  TCP is a connection oriented protocol. One endpoint connecting to another and both can send & receive messages.
+  TCP ONLY guarantees that the data you send & receive is in order. There are two streams for data, sending (writeable) 
+    & receiving(readable). Note that there's no way acknowledge the other side has received the data; just that they 
+    have been received in order. 
+  Connecting to a TCP Server:
+    "require('net').createConnection(port, host)"
+    If host argument isn't provided, it defaults to localhost.
 
 
 
