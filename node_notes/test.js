@@ -213,6 +213,17 @@ var fs = require('fs');
   }).listen(8000);
   */
 
+//Simple TCP Client
+  var net = require("net"), 
+    conn;
+    
+  function connectionListener(conn){
+    console.log("We have a connection");
+  }
+  
+  conn = net.createConnection(port, host, connectionListener); 
+    //if you're connecting to localhost, omit the host argument - net.createConnection(port, connectionListener)
+  
 
 
 

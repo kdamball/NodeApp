@@ -98,6 +98,26 @@ TCP Client:
   Connecting to a TCP Server:
     "require('net').createConnection(port, host)"
     If host argument isn't provided, it defaults to localhost.
+    You can also pass a call back as a third option and use it to determine when a connection is established
+      "require('net').createConnection(port, host, function(conn){console.log('Connected')})"
+    You can also listen to the 'connect' event emitted by the "createConnection()" object
+  Sending & Receiving Data:
+    "net.createConnection()" returns an instance of the "net.Socket", representing the connection to the server &
+      is both a readable & writeable stream
+      "
+        var conn = net.createConnection(port, host, callback)
+        conn.write('Some words to the server from client');
+        conn.write('SGVsbG8gV29ybGQh', 'base64') //string with encoding
+        conn.write((new Buffer('hello world'))) //raw buffer
+        conn.write('Hey', function(){console.log('We wrote to the server')}) //passing a callback function
+          //note that the callback is invoked if te data is written to the stream and not received by the server
+        conn.on('data', function(data){console.log('We received' +data)}) //listening to data from server
+        conn.setEncoding('base64') //if encoding not specified, it'll be treated as buffer
+        conn.end() //ending the connection
+        conn.end('Bye! Bye!', 'utf-8') //send data when ending
+      "
+
+      
 
 
 
