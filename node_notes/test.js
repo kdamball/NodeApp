@@ -266,20 +266,21 @@ var fs = require('fs');
     //if you're connecting to localhost, omit the host argument - net.createConnection(port, connectionListener)
 */
 
-/* //Get request (and bonus local writing of the request)
+//Get request (and bonus local writing of the request)
   var http = require("http"),
     fs = require("fs");
 
   var options = {
     host: "www.kdamball.com",
     port: 80,
-    path: "/resume"
+    path: "/resume",
+    method: "GET"
   };
 
   http.get(options, function(res){
-    res.pipe(fs.createWriteStream("resume"));
+    res.pipe(fs.createWriteStream("resume.pdf"));
   });
- */
+
 
 
 

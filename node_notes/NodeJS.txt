@@ -122,6 +122,7 @@ TCP Client:
 HTTP Requests:
   Get request - "http.get(option, callback)". "http.get" is shortcut for http.request
     where by options = host, port, path, headers, method etc.
+      callback = passes the response object as an argument.
 
 
 
