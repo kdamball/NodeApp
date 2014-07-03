@@ -171,11 +171,16 @@ var fs = require('fs');
   var server = net.createServer();
   var sockets = [];
   server.on('connection', function(socket) {
-    console.log('got a new connection');
+    console.log('got a new connection ');
     sockets.push(socket);
-    socket.write("Welcome!");
+    socket.write("Welcome! " +(sockets.length-1)+ " other connections");
+    sockets.forEach(function(otherSocket){
+      if(otherSocket !== socket){
+        otherSocket.write("We have a new connection, total of " +sockets.length+ " are connected")
+      }
+    });
     socket.on('data', function(data) {
-      // console.log('got data:', data.toString());
+      console.log('got data:', data.toString());
       sockets.forEach(function(otherSocket) {
         if (otherSocket !== socket) {
           otherSocket.write(data.toString());
@@ -211,19 +216,57 @@ var fs = require('fs');
     rs = fs.createReadStream("sample.mp4");
     rs.pipe(res);
   }).listen(8000);
-  */
+*/
 
-//Simple TCP Client
-  var net = require("net"), 
-    conn;
-    
-  function connectionListener(conn){
-    console.log("We have a connection");
-  }
-  
-  conn = net.createConnection(port, host, connectionListener); 
+
+/* //TCP Client that reconnects
+  var net = require('net');
+  var port = 4001;
+  var quitting = false;
+  var conn;
+  var retryTimeout = 3000; // 3 seconds
+  var retriedTimes = 0;
+  var maxRetries = 10;
+
+  process.stdin.resume();
+  process.stdin.on('data', function(data) {
+    if (data.toString().trim().toLowerCase() === 'quit') {
+      quitting = true;
+      console.log('quitting...');
+      conn.end();
+      process.stdin.pause();
+    } else {
+      conn.write(data);
+    }
+  });
+  (function connect() {
+    function reconnect() {
+      if (retriedTimes >= maxRetries) {
+        throw new Error('Max retries have been exceeded, I give up.');
+      }
+      retriedTimes += 1;
+      setTimeout(connect, retryTimeout);
+    }
+    conn = net.createConnection(port);
+    conn.on('connect', function() {
+      retriedTimes = 0;
+      console.log('connected to server');
+    });
+    conn.on('error', function(err) {
+      console.log('Error in connection:', err);
+    });
+    conn.on('close', function() {
+      if (! quitting) {
+        console.log('connection got closed, will try to reconnect');
+        reconnect();
+      }
+    });
+    conn.pipe(process.stdout, {end: false});
+  }());
     //if you're connecting to localhost, omit the host argument - net.createConnection(port, connectionListener)
-  
+*/
+
+
 
 
 

@@ -116,6 +116,9 @@ TCP Client:
         conn.end() //ending the connection
         conn.end('Bye! Bye!', 'utf-8') //send data when ending
       "
+  Errors:
+    Errors can happen b'se of hostname not found on DNS, target host isn't reachable, conn. is rejected
+  
 
       
 

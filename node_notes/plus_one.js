@@ -1,4 +1,4 @@
-// unpause the stdin stream
+/* // unpause the stdin stream
 var number;
 process.stdin.resume();
 process.stdin.on('data', function(data) {
@@ -9,4 +9,4 @@ process.stdin.on('data', function(data) {
  } catch(err) {
  process.stderr.write(err.message + "\n");
  }
-});
+}); */
