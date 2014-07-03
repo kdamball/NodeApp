@@ -118,13 +118,10 @@ TCP Client:
       "
   Errors:
     Errors can happen b'se of hostname not found on DNS, target host isn't reachable, conn. is rejected
-  
 
-      
-
-
-
-
+HTTP Requests:
+  Get request - "http.get(option, callback)". "http.get" is shortcut for http.request
+    where by options = host, port, path, headers, method etc.
 
 
 
