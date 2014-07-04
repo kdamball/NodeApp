@@ -1,5 +1,4 @@
-/* Reading a file buffer
-
+/* //Reading a file buffer
 var fs = require('fs');
   fs.open('./NodeJS.txt', 'r', function opened(err, fd) {
       if (err) { throw err }
@@ -24,8 +23,7 @@ var fs = require('fs');
 */
 
 
-/* Write to file
-
+/* //Write to file
     var fs = require('fs');
     fs.open('./test.txt', 'a', function opened(err, fd) {
       if (err) { throw err; }
@@ -45,7 +43,7 @@ var fs = require('fs');
     }); 
 */
 
-/* Child Process
+/* //Child Process
   var child = require("child_process"),
     exec = child.exec,
     cmd = "type *";
@@ -56,7 +54,7 @@ var fs = require('fs');
 */
 
 
-/* Passing Environment vars to a child process
+/* //Passing Environment vars to a child process
   var env = process.env,
    varName,
    envCopy = {},
@@ -76,7 +74,7 @@ var fs = require('fs');
   }); 
 */
 
-/* Running another JS file with child process
+/* //Running another JS file with child process
   var exec = (require("child_process")).exec;
   // have to include "" below because '' doesn't work with cmd
   exec('"' + process.execPath + '" child.js', {env: {number: 123}}, function(err, stdout, stderr){
@@ -266,7 +264,7 @@ var fs = require('fs');
     //if you're connecting to localhost, omit the host argument - net.createConnection(port, connectionListener)
 */
 
-//Get request (and bonus local writing of the request)
+/* //Get request (and bonus local writing of the request)
   var http = require("http"),
     fs = require("fs");
 
@@ -280,7 +278,7 @@ var fs = require('fs');
   http.get(options, function(res){
     res.pipe(fs.createWriteStream("resume.pdf"));
   });
-
+*/
 
 
 
