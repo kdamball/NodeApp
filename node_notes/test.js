@@ -271,14 +271,17 @@ var fs = require('fs');
   var options = {
     host: "www.kdamball.com",
     port: 80,
-    path: "/resume",
-    method: "GET"
+    path: "/resume"
   };
-
+  var localFile = fs.createWriteStream("resume.pdf");
+  
   http.get(options, function(res){
-    res.pipe(fs.createWriteStream("resume.pdf"));
+    console.log("getting it");
+    res.pipe(localFile);
   });
-*/
+ */
+ 
+ 
 
 
 

@@ -124,7 +124,32 @@ HTTP Requests:
     where by options = host, port, path, headers, method etc.
       callback = passes the response object as an argument.
   "http.request()" returns an "http.ClientRequest" object, which is a writeable stream.
-  Response Object - 
+  Response Object - "res.statusCode, res.httpVersion, res.headers"
+  Pooling Sockets using HTTP.AGENT - For http requests, node uses an agent. Agent is the entity in node making
+    http requests for you. It maintains a pool of live TCP sockets (pool of open but out-of-use network
+    connections & port pair). When a request happens, the agent will ask to keep the conn. alive. When done,
+    the socket is closed. This way you don't have to manually close the HTTP client. When making a request, a socket
+    is selected or a new conn. is created for the request, "http.ClientRequest" emits a "socket" event. After 
+    request is done, sockets are removed from agent's pool when the socket emits a "close" event or an "agentRemove" 
+    event. If you want to keep a request open for a long time, you can remove it from the pool. 
+    "
+      req.on('socket', function(socket) {
+       socket.emit('agentRemove');
+      });
+    "
+    Node allows a max of 5 open sockets/host pair on a given process. This implies, under heavy load, node will 
+    serialize requests to the same host-port to re-use the sockets. You can remove this behaviour by disabling 
+    agent socket pooling ("agent: false" in "http.request"options). You can also change the max number of open 
+    sockets allowed "http.Agent.defaultMaxSockets".
+
+
+
+
+
+
+
+
+
 
 
 
