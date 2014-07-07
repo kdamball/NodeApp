@@ -139,8 +139,39 @@ HTTP Requests:
     "
     Node allows a max of 5 open sockets/host pair on a given process. This implies, under heavy load, node will 
     serialize requests to the same host-port to re-use the sockets. You can remove this behaviour by disabling 
-    agent socket pooling ("agent: false" in "http.request"options). You can also change the max number of open 
+    agent socket pooling ("agent: false" in "http.request" options). You can also change the max number of open 
     sockets allowed "http.Agent.defaultMaxSockets".
+  Request Module - authored by Mikeal Rogers. Abstracts away most of the cumbersome requests actions. 
+    "
+      var request = require("requests");
+      request("http://google.com/search?q=hello+world", function(err, res, body){
+        //callback actions
+      });
+    "
+    You can use the "options" object inplace of the url. 
+    Redirects: Request module follows redirects by default. You can disable this by setting the "followRedirect" to 
+      "false" in request options. Sometimes redirects can be faulty (e.g redirect loops). You can set a max no. for 
+      redirects in the "maxRedirects" option.
+    You can also perform other HTTP methods like put, post, delete etc. 
+      "
+        var request = require("request");
+        request.post(options, callback);      
+      "
+    Cookie Jar: By default, request inteprets all cookies in a global cookie jar. You can disable cookies for an app 
+      globally by: "request.defaults({jar: false})"
+      You can also turn it off on a request basis: 
+        "
+          var options = {url: "http://example.com", jar: false};
+          request(options, callback)
+        "
+      You can also have a specific jar for each request:
+        "
+          var jar = request.jar(), option = {url: "http://example.com", jar: jar};
+          request(options, callback);
+        "
+
+TSL/SSL:
+  
 
 
 
