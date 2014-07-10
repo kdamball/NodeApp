@@ -1,7 +1,25 @@
 {
-	"name": "hello",
-	"version": "0.0.1",
-	"dependencies": {
-		"express": "latest"
-	}
+  "name": "nodeApp",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "~4.5.1"
+  },
+  "description": "NodeApp\r =======",
+  "main": "./src/index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kdamball/NodeApp.git"
+  },
+  "keywords": [
+    "Elementary"
+  ],
+  "author": "Kado Damball",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kdamball/NodeApp/issues"
+  }
 }
