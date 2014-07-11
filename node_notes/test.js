@@ -193,9 +193,9 @@ var fs = require('fs');
   server.on('close', function() {
     console.log('Server closed');
   });
-  server.listen(4001);
-
+  server.listen(4001, "169.254.206.193");
  */
+
 
 /* //HTTP Server
   var util = require("util");
@@ -214,8 +214,8 @@ var fs = require('fs');
     rs = fs.createReadStream("sample.mp4");
     rs.pipe(res);
   }).listen(8000);
-*/
 
+ */
 
 /* //TCP Client that reconnects
   var net = require('net');
