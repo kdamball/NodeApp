@@ -170,6 +170,10 @@ HTTP Requests:
           request(options, callback);
         "
 
+Debugging:
+  Console.log - it takes an argument and passes it to "util.format", which spits it backout the usual "stdout".
+    Placeholders: %j - JSON encode, %d - number, %s - string
+    console.log is a blocking operation (blocks the event loop). Avoid using it in prod. code
 
 
 
