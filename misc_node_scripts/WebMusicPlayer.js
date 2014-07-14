@@ -10,19 +10,23 @@
    songsArray = stdout.split("\r\n");
   });
   
-  var body = '<audio controls autoplay src="/take"></audio> <p>Hello!</p> <button onclick="random()">Change Song</button> <script>var audio = document.getElementsByTagName("audio")[0]; function random(){audio.src = "/take"}; var timer;if(audio.duration>=10 && audio.duration < 600){timer=audio.duration*1000;}else{timer=300*1000;}setTimeout(random,timer);</script>'
+  var body = '<p>Hello!</p> <audio onended="random()" controls autoplay src="/take"></audio> <br><br> <button onclick="random()">Change Song</button> <script>audio = document.getElementsByTagName("audio")[0]; function random(){ audio.src = "/take";}</script>'
   
   http.createServer(function(req, res){
    
-    console.log(req.url)
     if(req.url == "/take"){
       res.writeHead(200,{"Content-Type": "audio/mp3"});
-      rs = fs.createReadStream(songsArray[Math.floor(Math.random()*songsArray.length)]);
+      var song = songsArray[Math.floor(Math.random()*(songsArray.length -1))];
+      console.log("Broadcasting- " +songsArray.indexOf(song)+": "+ song);
+      rs = fs.createReadStream(song);
       rs.pipe(res);
+    }else if(req.url == "/testing"){
+      res.writeHead(200, {"Content-Type": "text/plain"});
+      res.end("Hello World");
     }else{
       res.writeHead(200, {"Content-Type": "text/html"});
-      res.write(body);
+      res.end(body);
     }
     
-  }).listen(8000, "169.254.206.193");
+  }).listen(8000, "192.168.37.1");
 
