@@ -182,7 +182,20 @@ Debugging:
       scripts.
       
 Controlling the Callback Flow:
-  
+  With Async operations, the result is passed to a callback. With lots of I/O operations, callback mgmt can be tricky.
+  Boomerang Effect - It happens when each callback relies on the preceding one finishing first. This leads to several 
+    nested callbacks (aka. callback hell).
+  Avoiding Boomerang effect by declaring fns - declare all fns in the same scope. You can also use generic flow control 
+    mechanism. This includes passing two args:  an array of all callbacks and a final callback or error handling fn.
+    (See test.js for more details)
+  Using Async Library - Helps with generic flow ctrl mechanism. Check test.js for more code. 
+    Series - "async.series" takes an array of fns (to execute one after the previous is done) and fn to call when all 
+      fns are done.
+    Parallel execution - "async.parallel", just like above, but we execute all fns simultaneously. 
+    Cascading - "async.waterfall" for when one fn relies on the previous fn's output.
+      
+
+    
     
     
 

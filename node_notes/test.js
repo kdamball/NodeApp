@@ -19,7 +19,6 @@ var fs = require('fs');
                 }
               });
 }); 
-
 */
 
 
@@ -42,6 +41,7 @@ var fs = require('fs');
                 });
     }); 
 */
+
 
 /* //Child Process
   var child = require("child_process"),
@@ -74,6 +74,7 @@ var fs = require('fs');
   }); 
 */
 
+
 /* //Running another JS file with child process
   var exec = (require("child_process")).exec;
   // have to include "" below because '' doesn't work with cmd
@@ -82,7 +83,7 @@ var fs = require('fs');
     console.log("stdout: \n", stdout);
     console.log("stderr: \n", stderr);
   });
- */
+*/
 
  
 /*  //CMD inputs: unpause the stdin stream
@@ -97,9 +98,9 @@ var fs = require('fs');
    process.stderr.write(err.message + "\n");
    }
   });
+*/
 
- */
-
+ 
 /*  //CHILD PROCESS SPAWN
   var spawn = require('child_process').spawn;
   //Spawn the child with a node process executing the plus_one app
@@ -122,8 +123,7 @@ var fs = require('fs');
   child.stderr.on('data', function(data) {
    process.stdout.write(data);
   });
-
- */
+*/
 
  
 /* Timeout a connection/socket (NOT A SERVER!!)
@@ -157,12 +157,14 @@ var fs = require('fs');
   }).listen(4001); 
 */
 
+
 /* Pipe Stream from Socket
   var ws = require('fs').createWriteStream('mysocketdump.txt');
   require('net').createServer(function(socket) {
    socket.pipe(ws);
   }).listen(4001); 
 */
+
 
 /* // Chat App 
   var net = require('net');
@@ -203,8 +205,7 @@ var fs = require('fs');
     res.writeHead(200, {"Content-Type": "text/plain"});
     res.end(util.inspect(req.headers));
   }).listen(8000)
-
- */
+*/
 
  
 /* //HTTP File piping
@@ -214,9 +215,9 @@ var fs = require('fs');
     rs = fs.createReadStream("sample.mp4");
     rs.pipe(res);
   }).listen(8000);
+*/
 
- */
-
+ 
 /* //TCP Client that reconnects
   var net = require('net');
   var port = 4001;
@@ -264,6 +265,7 @@ var fs = require('fs');
     //if you're connecting to localhost, omit the host argument - net.createConnection(port, connectionListener)
 */
 
+
 /* //Get request (and bonus local writing of the request)
   var http = require("http"),
     fs = require("fs");
@@ -280,6 +282,7 @@ var fs = require('fs');
     res.pipe(localFile);
   });
  */
+ 
  
  /*  //Request Server
   require('http').createServer(function(req, res) {
@@ -313,6 +316,116 @@ var fs = require('fs');
     }
   }).listen(4001);
 */
+
+
+/* //Preventing Callback hell with generic ﬂow control mechanism.
+  var fs = require('fs');
+  
+  function cascade(callbacks, callback) {
+  // clone the array
+    var functions = callbacks.slice(0);
+    function processNext(err) {
+      if (err) {
+        return callback(err);
+      }
+      var args = Array.prototype.slice.call(arguments);
+      var func = functions.shift();
+      if (func) {
+      // remove first argument containing the error
+        args.shift();
+      } else {
+        func = callback;
+      }
+      args.push(processNext);
+      func.apply(this, args);
+    }
+    processNext.call(this);
+  }
+  function append_some_a_to_b(callback) {
+    var aFd, bFd,
+    buffer = new Buffer(10);
+    cascade([
+      function open_a(next) {
+        fs.open(__dirname + '/a.txt', 'r', next);
+      },
+      function read_from_a(fd, next) {
+        aFd = fd;
+        fs.read(aFd, buffer, 0, buffer.length, 0, next);
+      },
+      function close_a(bytesRead, buf, next) {
+        fs.close(aFd, next);
+      },
+      function open_b(next) {
+        fs.open(__dirname + '/b.txt', 'a', next);
+      },
+      function stat_b(fd, next) {
+        bFd = fd;
+        fs.fstat(bFd, next);
+      },
+      function write_b(bStats, next) {
+        fs.write(bFd, buffer, 0, buffer.length, bStats.size, next);
+      },
+      function close_b(bytesWritten, buf, next) {
+        fs.close(bFd, next);
+      }
+    ], callback);
+  }
+  console.log('starting...');
+  append_some_a_to_b(function done(err) {
+    if (err) {
+    throw err;
+    }
+    console.log('done');
+  });
+*/
+
+
+/* //Async example. Uses server that responds with a square of a POST request
+  var async = require('async'),
+      request = require('request');
+  function done(err, results) {
+    if (err) {
+      throw err;
+    }
+    console.log('results: %j', results);
+  }
+  async.series([
+    function(next) {
+      request.post({uri: 'http://localhost:8080', body: '4'},
+        function(err, res, body) {
+          next(err, body && JSON.parse(body));
+        }
+      );
+    },
+    function(next) {
+      request.post({uri: 'http://localhost:8080', body: '5'},
+        function(err, res, body) {
+          next(err, body && JSON.parse(body));
+        }
+      );
+    }
+  ], done);
+*/
+
+/* //Cascading: async waterfall
+var async = require('async'),
+    request = require('request');
+function done(err, res, body) {
+  if (err) {
+    throw err;
+  }
+  console.log("3^4 = %d", body);
+}
+async.waterfall([
+  function(next) {
+    request.post({uri: 'http://localhost:8080', body: "3"}, next)
+  },
+  function(res, body, next) {
+    request.post({uri: 'http://localhost:8080', body: body}, next);
+  }
+], done);
+*/
+
 
 
 
