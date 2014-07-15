@@ -174,6 +174,17 @@ Debugging:
   Console.log - it takes an argument and passes it to "util.format", which spits it backout the usual "stdout".
     Placeholders: %j - JSON encode, %d - number, %s - string
     console.log is a blocking operation (blocks the event loop). Avoid using it in prod. code
+  V8 Debugger - Built in node debugger. To run it, "> node debug app.js"
+    You can check out the commands with "help"
+  Using Node Inspector - Install with "npm install node-inspector"
+    Uses the browser (i.e Chrome) for GUI. To use: "> node --debug-brk app.js". "--debug-brk" breaks the app on the 1st
+      link while "--debug" enables simply debugging. When debugging servers, use "--debug" and use "--debug-brk" for 
+      scripts.
+      
+Controlling the Callback Flow:
+  
+    
+    
 
 
 
