@@ -13,7 +13,7 @@ var recharge = function(){
   });
 }
 
-var enrollBundle = function(e){
+var enrollBundle = function(){
   request.post("http://www.zantel.com/ezyrecharge/func.php", function(err, res, body){
     // console.log(res.statusCode);
     console.log(body);
@@ -25,7 +25,7 @@ var enrollBundle = function(e){
   });
 }
 
-var checkBalance = function(e){
+var checkBalance = function(){
   request.post("http://www.zantel.com/ezyrecharge/func.php", function(err, res, body){
     // console.log(res.statusCode);
     console.log(body);
