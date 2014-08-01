@@ -1,9 +1,10 @@
 var request = require("request"),
     number = "0775061241",
-    monthly = "Month 12GB";
+    monthly = "Month 12GB",
+    url = "http://www.zantel.com/ezyrecharge/func.php";
 
 var recharge = function(){ 
-  request.post("http://www.zantel.com/ezyrecharge/func.php", function(err, res, body){
+  request.post(url, function(err, res, body){
     console.log(body);
   }).form({
     "msisdn": number,
@@ -15,7 +16,7 @@ var recharge = function(){
 }
 
 var enrollBundle = function(){
-  request.post("http://www.zantel.com/ezyrecharge/func.php", function(err, res, body){
+  request.post(url, function(err, res, body){
     console.log(body);
   }).form({
     "msisdn": number,
@@ -26,7 +27,7 @@ var enrollBundle = function(){
 }
 
 var checkBalance = function(){
-  request.post("http://www.zantel.com/ezyrecharge/func.php", function(err, res, body){
+  request.post(url, function(err, res, body){
     console.log(body);
   }).form({
     "msisdn": number,
