@@ -193,6 +193,20 @@ Controlling the Callback Flow:
       fns are done.
     Parallel execution - "async.parallel", just like above, but we execute all fns simultaneously. 
     Cascading - "async.waterfall" for when one fn relies on the previous fn's output.
+    Queuing - "async.queue" for performing repetitive async jobs and to control concurrency (no. of pending jobs)
+      The results are shown in the order in which they were completed and not how they were previously arranged.
+      To ensure order, use "async.forEach"
+      Max concurrency settings can be changed afterwards. This can easily be modified to match the obeserved latency,
+        or limit the number of requests to a server (i.e: "queue.concurrency"). 
+      When a queue's concurrency is maxed, it emits an event. You can check for it using:
+        "
+          queue.saturated = function(){
+            console.log('The queue is full')
+          }
+        "
+      Likewise, you can also listen to the "empty" event or the "drain" event.
+      
+      
       
 
     
