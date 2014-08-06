@@ -458,9 +458,17 @@ async.waterfall([
  */
 
 
+/* //Middlewares
+  var connect = require('connect');
+  var writeHeader = require('./write_header');
+  var replyText = require('./reply_text');
+  var app = connect.createServer(
+    writeHeader('X-Powered-By', 'Node'),
+    replyText('Hello World!')
+  );
+  app.listen(8080);
 
-
-
+ */
 
 
 

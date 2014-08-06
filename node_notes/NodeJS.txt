@@ -205,7 +205,10 @@ Controlling the Callback Flow:
           }
         "
       Likewise, you can also listen to the "empty" event or the "drain" event.
-    Iterating - built-in array's "forEach" wont work 
+
+HTTP Middleware:
+  Connect Library is one of such helpers with the middleware. They receive & handle requests
+  
       
       
 
