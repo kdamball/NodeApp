@@ -208,6 +208,16 @@ Controlling the Callback Flow:
 
 HTTP Middleware:
   Connect Library is one of such helpers with the middleware. They receive & handle requests
+    //most of this is pretty standard middleware stuff (ie: handle requests, forwarding, error handling, static files,
+    cookies & sessions). I tried not to write too much because most of it is pretty straightforward. I'll only focus on 
+    requests.
+  Connect's Sessions - When initial request is made, session identifier is created and connect sends a browser cookie.
+    On the server, a session is an object that allows you to store name-value pairs. By default it saves them to memory 
+    but allows you to change this. Several third party options can store sessions too (e.g Memcache, Redis)
+    It is advisable to use third party server to store the sessions. A process restart will usually destroy the session. 
+    Also, it ensures load balancing allow multiple Node processes to share sessions. Saving a session to memory will only 
+    make the session available to that particular process only.
+    
   
       
       
