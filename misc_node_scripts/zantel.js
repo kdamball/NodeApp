@@ -35,3 +35,5 @@ var checkBalance = function(){
     "func": "CheckBalance"
   });
 }
+
+checkBalance()
