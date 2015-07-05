@@ -1,0 +1,4 @@
+node_modules/*
+
+# CERT KEYS
+*.pem
