@@ -501,6 +501,28 @@ async.waterfall([
 */
 
 
+/*  // HTTPS
+
+  // OPENSSL commands to generate certificates
+  // $ openssl genrsa -out priv_key.pem 1024
+  // $ openssl req -new -key priv_key.pem -out csr.pem -config 'C:\Program Files (x86)\Git\ssl\openssl.cnf'
+  // $ openssl x509 -req -in csr.pem -signkey priv_key.pem -out cert.pem
+
+  var https = require('https'),
+      fs = require('fs');
+
+  var serverOptions = {
+    key: fs.readFileSync('./priv_key.pem'),
+    cert: fs.readFileSync('./cert.pem')
+  };
+
+  var server = https.createServer(serverOptions, function(req, res) {
+    res.writeHead(200, {"Content-Type": "text/plain"});
+    res.end("Hello World!");
+  });
+
+  server.listen(1337);
+*/
 
 
 
